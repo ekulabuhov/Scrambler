@@ -1,0 +1,78 @@
+﻿ .defaultBody {
+    margin: 10%;
+    text-align: center;
+}
+
+.lessonSelectBody {
+    margin: 5%;
+}
+
+#rack {
+    margin: 10px auto;
+    display:inline-block;
+}
+
+.tile {
+    margin-right: 10px;
+	text-transform:uppercase;
+    float:left;
+}
+
+#smallRack {
+    display:inline-block;
+    height:22px;
+}
+
+#smallRack .tile {
+    -ms-zoom: 0.7;
+    zoom: 0.7;
+    margin: 0px;
+    color: black;
+    background-color: white;
+    background-image: none;
+}
+
+    #smallRack .tile:hover {
+        cursor: initial;
+    }
+
+#wordReference ul {
+    text-align: left;
+    display: inline-block;
+    width: 300px;
+}
+
+.video_row_info_line {
+    height: 16px;
+    margin-top: 150px;
+    position: absolute;
+    width: 274px;
+    color: white;
+    text-align: left;
+    padding: 6px 8px;
+    background-color: rgba(0,0,0,0.5);
+    font-family: tahoma;
+    font-size: 11px;
+}
+
+.video_row_info_name {
+    padding-right: 34px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.video_row_info_durations {
+    position: absolute;
+    right: 7px;
+    bottom: 2px;
+    font-weight: bold;
+}
+
+.video_image_div {
+    height: 178px;
+}
+
+a.thumbnail:hover {
+    text-decoration:none;
+}

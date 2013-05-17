@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>TypeScript HTML App</title>
+    <link rel="stylesheet" href="SubtitleBuilder.css" type="text/css" />
+    <script src="SubtitleBuilder.js"></script>
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="youTubePlayer.js"></script>
+    <style type="text/css">
+        </style>
+</head>
+<body>
+    <h1>TypeScript HTML App</h1>
+
+    <div id="content">
+        <textarea id="text"></textarea>
+        <div><input id="btnConvert" type="button" value="button" /></div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th class="th-text">Text</th>
+                <th class="th-time">Start</th>
+                <th class="th-time">End</th>
+            </tr>
+        </thead>
+        <tbody id="rows">
+        </tbody>
+    </table>
+    </div>
+    <span id="timeSpan"></span><br />
+    <div id="videoPlayerContainer">
+        <div id="videoPlayer"></div>
+        <div id="previewContainer">
+            <div id="preview"></div>
+        </div>
+    </div>
+
+</body>
+</html>
