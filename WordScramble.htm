@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <title>Scrammbler HTML App</title>
-    <link rel="stylesheet" href="https://dl.dropbox.com/u/67252270/bootstrap/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="http://dl.dropbox.com/u/67252270/bootstrap/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="wordScramble.css" type="text/css" />
-    <script src="https://dl.dropbox.com/u/67252270/bootstrap/js/bootstrap.js"> </script>
     <script src="http://code.jquery.com/jquery-git.js"></script>
+    <script src="http://dl.dropbox.com/u/67252270/bootstrap/js/bootstrap.js"> </script>
     <script src="db.js"></script>
     <script src="wordReference.js"> </script>
     <script src="bingTranslator.js"> </script>
@@ -20,33 +20,65 @@
     <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"> </script>
 </head>
 <body class="defaultBody">
-    <video id="videoPlayer" style="display: none"></video>
-    <div class="input-append">
-        <input class="span6" id="span2" type="text" value="C'est le malaise du moment" />
-        <button id="btn" class="btn" type="button">Go!</button>
-    </div>
-    <div id="sentence"></div>
-    <div id="translation"></div>
-    <div id="smallRack"></div>
-    <br />
-    <div id="rack"></div>
-    <br />
-    <a class="btn" id="playSampleBtn"><i class="icon-play"></i></a>
-    <div id="wordReference" style="display: none">
-        <span id="phonetics"></span>
-        <a class="btn" id="playBtn" href="#"><i class="icon-volume-up"></i></a>
-        <audio id="audioSample"></audio>
-        <div id="wordReferenceData">
-            <h2>Translation</h2>
+    <div id="myCarousel" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="item active">
+                <video id="videoPlayer" style="display: none"></video>
+                <div class="input-append">
+                    <input class="span6" id="span2" type="text" value="C'est le malaise du moment" />
+                    <button id="btn" class="btn" type="button">Go!</button>
+                </div>
+                <div id="sentence"></div>
+                <div id="translation"></div>
+                <div id="smallRack"></div>
+                <br />
+                <div id="rack"></div>
+                <br />
+                <a class="btn" id="playSampleBtn"><i class="icon-play"></i></a>
+                <div id="wordReference" style="display: none">
+                    <span id="phonetics"></span>
+                    <a class="btn" id="playBtn" href="#"><i class="icon-volume-up"></i></a>
+                    <audio id="audioSample"></audio>
+                    <div id="wordReferenceData">
+                        <h2>Translation</h2>
 
-            <ul id="translationList"></ul>
-            <h2>Usage</h2>
-            <ul id="compoundsList"></ul>
+                        <ul id="translationList"></ul>
+                        <h2>Usage</h2>
+                        <ul id="compoundsList"></ul>
+                    </div>
+                </div>
+            </div>
+			
+			<div class="item">
+                <video id="videoPlayer" style="display: none"></video>
+                <div class="input-append">
+                    <input class="span6" id="span2" type="text" value="C'est le malaise du moment" />
+                    <button id="btn" class="btn" type="button">Go!</button>
+                </div>
+                <div id="sentence"></div>
+                <div id="translation"></div>
+                <div id="smallRack"></div>
+                <br />
+                <div id="rack"></div>
+                <br />
+                <a class="btn" id="playSampleBtn"><i class="icon-play"></i></a>
+                <div id="wordReference" style="display: none">
+                    <span id="phonetics"></span>
+                    <a class="btn" id="playBtn" href="#"><i class="icon-volume-up"></i></a>
+                    <audio id="audioSample"></audio>
+                    <div id="wordReferenceData">
+                        <h2>Translation</h2>
+
+                        <ul id="translationList"></ul>
+                        <h2>Usage</h2>
+                        <ul id="compoundsList"></ul>
+                    </div>
+                </div>
+            </div>
+			
         </div>
-    </div>
-
-    <div>
-
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+ <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
     </div>
 
 </body>

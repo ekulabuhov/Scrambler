@@ -123,8 +123,9 @@ class WordScramble {
         // External services
         if (randomVoc.translatorWord != undefined)
             randomWord = randomVoc.translatorWord;
+
         var wr = new Dictionary.WordReference();
-        wr.getTranslation(randomWord, 'fr', this.showWordReferenceResults);
+        wr.getTranslation(randomWord, 'fr', (data) => this.showWordReferenceResults(data));
         Dictionary.BingTranslator.speak(randomWord, 'fr', this.audioPrononcuationReceived);
         Dictionary.WiktionaryParser.parse(randomWord, 'fr', this.wikiDataReceived);
         randomWord = randomVoc.word;

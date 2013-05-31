@@ -22,9 +22,7 @@ module Dictionary {
         // Instance member
         //getDist() { return Math.sqrt(this.x * this.x + this.y * this.y); }
         
-        static callback: (arrayOfCompounds: Definition) => any;
-
-        showResult(data) {
+        hydrate(data) : Definition {
             if (data.original != undefined) {
                 var compounds = [];
                 for (var i in data.original.Compounds) {
@@ -52,7 +50,8 @@ module Dictionary {
                 compounds: compounds,
                 translations: translations
             };
-            WordReference.callback(def);
+
+            return def;
         }
 
         endsWith(str, suffix) {
@@ -63,16 +62,10 @@ module Dictionary {
             $.ajax({
                 url: 'http://api.wordreference.com/991f0/json/' + lang + 'en/' + encodeURI(word),
                 dataType: 'jsonp',
-                success: (data) => this.showResult(data),
+                success: (data) => callback(this.hydrate(data)),
                 cache: true
             });
-            
-            WordReference.callback = callback;
         };
-
-
-        // Static member
-        //static origin = new Point(0, 0);
     }
 
 }

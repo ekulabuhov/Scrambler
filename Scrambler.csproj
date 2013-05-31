@@ -16,15 +16,12 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="DT_bootstrap.js" />
     <Content Include="wordScramble.css" />
-    <Content Include="handlebars.js" />
     <Content Include="LessonSelect.html" />
     <TypeScriptCompile Include="lessonSelect.ts" />
     <Content Include="lessonSelect.js">
       <DependentUpon>lessonSelect.ts</DependentUpon>
     </Content>
-    <Content Include="nunjucks-dev.js" />
     <Content Include="youTubePlayer.js">
       <DependentUpon>youTubePlayer.ts</DependentUpon>
     </Content>
@@ -49,7 +46,6 @@
     <Content Include="subtitleBuilder.js">
       <DependentUpon>subtitleBuilder.ts</DependentUpon>
     </Content>
-    <Content Include="Utils.js" />
     <Content Include="wiktionaryParser.js">
       <DependentUpon>wiktionaryParser.ts</DependentUpon>
     </Content>
