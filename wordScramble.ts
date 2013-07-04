@@ -106,30 +106,6 @@ class WordScramble {
         var replace = '';
         for (var i = 0; i < randomWord.length; i++) replace += '_'
         var returnSentence = originalSentence.replace(new RegExp(randomWord, 'ig'), replace);
-
-        // Clean the screen
-        $('#rack').html("");
-        $('#smallRack').html("");
-        // translation and usage always gets recreated
-        $('#wordReferenceData').html("");
-        // this includes audio and pronunciation, we want to hide it. 
-        $('#wordReference').hide();
-        $('#phonetics').html("");
-        $('#sentence').text(returnSentence);
-        $('#translation').html(translatedSentence);
-        $('#playSampleBtn')[0].onclick = () => this.playSample(this.lyrics.timeCode[randomVoc.line], this.lyrics.timeCode[randomVoc.line + 1]);
-        // End of Clean the screen
-        
-        // External services
-        if (randomVoc.translatorWord != undefined)
-            randomWord = randomVoc.translatorWord;
-
-        var wr = new Dictionary.WordReference();
-        wr.getTranslation(randomWord, 'fr', (data) => this.showWordReferenceResults(data));
-        Dictionary.BingTranslator.speak(randomWord, 'fr', this.audioPrononcuationReceived);
-        Dictionary.WiktionaryParser.parse(randomWord, 'fr', this.wikiDataReceived);
-        randomWord = randomVoc.word;
-        // End of External services
         
         this.guessedWord = randomWord;
         this.guessedIndex = 0;
@@ -143,14 +119,48 @@ class WordScramble {
             explodedWord[i] = temp;
             randomWord = explodedWord.join('');
         }
-
-        randomWord.split('').forEach((value) => {
-            $('#rack').append($('<div/>', {
-                class: "tile btn btn-primary",
-                text: value
-            }));
+		
+		var renderedTemplate = Mustache.render($('#template').html(), {
+            sentence: returnSentence,
+            translation: translatedSentence,
+            tiles: randomWord.split('')
         });
-        
+		
+		$('.item').not('.active').html(renderedTemplate)
+		
+		$('#myCarousel').one('slid', () => {
+			$('.item').not('.active').html("")
+			$('#playSampleBtn')[0].onclick = () => this.playSample(this.lyrics.timeCode[randomVoc.line], this.lyrics.timeCode[randomVoc.line + 1]);
+		
+			// External services
+			if (randomVoc.translatorWord != undefined)
+				randomWord = randomVoc.translatorWord;
+			else
+				randomWord = randomVoc.word;
+
+			var wr = new Dictionary.WordReference();
+			wr.getTranslation(randomWord, 'fr', (data) => this.showWordReferenceResults(data));
+			Dictionary.BingTranslator.speak(randomWord, 'fr', this.audioPrononcuationReceived);
+			Dictionary.WiktionaryParser.parse(randomWord, 'fr', this.wikiDataReceived);
+			// End of External services
+			
+			$('#myCarousel').carousel('pause')
+			
+			// Assign Event Handlers
+			document.onkeydown = (ev) => this.keyHandler(ev);
+			$(".tile").click((ev) => this.onTileClick(ev));
+			$('#playBtn').click(() => {
+				// some kind of a bug is preventing me from re-starting the audio using currentTime
+				var src = this.audioPlayer.src;
+				this.audioPlayer.src = '';
+				this.audioPlayer.src = src;
+				this.audioPlayer.play()
+			});
+			$('#nextBtn').click(() => this.scramble());
+		});
+		
+		$('#myCarousel').carousel('next')
+		        
         return [originalSentence, returnSentence, randomWord];
     }
 
@@ -205,33 +215,7 @@ window.onload = () => {
     vkGetUriByAid(lesson, () => {
         var audio = <HTMLAudioElement>$('<audio src=' + lesson.mediaUri + '/>').appendTo('body')[0];
         game = new WordScramble(lyrics, audio);
-    });
-
-    //var player = new Shapes.YouTubePlayer(lesson.mediaUri, () => {
-    //    game = new WordScramble(lyrics, player);
-    //});
-
-    $('#btn').click(function () {
-        var scramble = game.scramble()
-        console.log(scramble)
-
-        //$(".tile").draggable({
-        //    stack: ".tile",
-        //    scroll: false,
-        //    containment: "parent"
-        //    //revert: "invalid"
-        //});
-
-        document.onkeydown = (ev) => game.keyHandler(ev);
-        $(".tile").click((ev) => game.onTileClick(ev));
-        $('#playBtn').click(() => {
-            // some kind of a bug is preventing me from re-starting the audio using currentTime
-            var src = game.audioPlayer.src;
-            game.audioPlayer.src = '';
-            game.audioPlayer.src = src;
-            //game.audioPlayer.currentTime = 0;
-
-            game.audioPlayer.play()
-        });
-    });
+		var scramble = game.scramble()
+		console.log(scramble)
+    });  
 }
