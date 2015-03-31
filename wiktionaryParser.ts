@@ -68,7 +68,7 @@ module Dictionary {
                     rvprop: 'content'
                 },
                 dataType: 'jsonp',
-                success: show_result
+                success: WiktionaryParser.show_result
             });
 
             WiktionaryParser.callback = callback;

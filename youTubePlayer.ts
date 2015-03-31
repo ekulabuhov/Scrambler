@@ -9,8 +9,8 @@ module Shapes {
         pause();
         currentTime: number;
         volume: number;
-        paused: bool;
-        playing: bool;
+        paused: Boolean;
+        playing: Boolean;
     }
 
     // Class
@@ -63,18 +63,18 @@ module Shapes {
             this.player.setVolume(val);
         }
 
-        get paused(): bool {
+        get paused(): Boolean {
             return this.player.getPlayerState() == 2;
         }
 
-        get playing(): bool {
+        get playing(): Boolean {
             return this.player.getPlayerState() == 1;
         }
     }
 }
 
 interface HTMLAudioElement extends HTMLMediaElement {
-    playing: bool;
+    playing: Boolean;
 }
 
 Object.defineProperty(HTMLAudioElement.prototype, "playing", {

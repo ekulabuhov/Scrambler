@@ -65,7 +65,7 @@ module Dictionary {
                 success: (data) => callback(this.hydrate(data)),
                 cache: true
             });
-        };
+        }
     }
 
 }

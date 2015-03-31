@@ -1,5 +1,8 @@
 /// <reference path="typings\jquery\jquery.d.ts" />
 /// <reference path="typings\jqueryui\jqueryui.d.ts" />
+/// <reference path="typings\mustache.d.ts" />
+// Include JQuery carousel
+/// <reference path="typings\bootstrap\bootstrap.d.ts" />
 /// <reference path="wordReference.ts" />
 /// <reference path="bingTranslator.ts" />
 /// <reference path="wiktionaryParser.ts" />
@@ -14,7 +17,7 @@ class WordScramble {
     audioPlayer = <HTMLAudioElement>$('#audioSample')[0];
     //audio = <HTMLVideoElement>$('video')[0];
     vocabularyIndex: number = 0;
-    selectedVocabulary: number[] = new number[];
+    selectedVocabulary: number[] = new Array<number>();
 
     constructor(public lyrics: Lyrics, public audio: Shapes.IMediaPlayer) {
         while (this.selectedVocabulary.length < 10) {
@@ -212,10 +215,8 @@ window.onload = () => {
     var lesson = Logic.Db.getLesson(lessonId);
     var game: WordScramble;
 
-    vkGetUriByAid(lesson, () => {
-        var audio = <HTMLAudioElement>$('<audio src=' + lesson.mediaUri + '/>').appendTo('body')[0];
-        game = new WordScramble(lyrics, audio);
-		var scramble = game.scramble()
-		console.log(scramble)
-    });  
+    var audio = <HTMLAudioElement>$('<audio src=placebo-protege_moi.mp3 />').appendTo('body')[0];
+    game = new WordScramble(lyrics, audio);
+	var scramble = game.scramble()
+    console.log(scramble);
 }
