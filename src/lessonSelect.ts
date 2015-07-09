@@ -1,5 +1,5 @@
-/// <reference path="typings\jquery\jquery.d.ts" />
-/// <reference path="typings\dataTables.d.ts" />
+/// <reference path="..\typings\jquery\jquery.d.ts" />
+/// <reference path="..\typings\dataTables.d.ts" />
 
 class aaDataArray {
     constructor(public array: string[]) { }

@@ -1,4 +1,4 @@
-/// <reference path="typings\jquery\jquery.d.ts" />
+/// <reference path="..\typings\jquery\jquery.d.ts" />
 /// <reference path="youTubePlayer.ts" />
 
 class Greeter {
@@ -56,7 +56,7 @@ class Main {
         this.timerHandle = setInterval(() => {
             var currentTime = this.videoPlayer.currentTime;
             this.timeSpan.innerHTML = currentTime.toString();
-            var matchingRecords = this.karaoke.filter(function (el, index, array) {
+            var matchingRecords = this.karaoke.filter(function(el, index, array) {
                 return el.timeCode <= currentTime
             })
             if (matchingRecords.length > 0 && currentTime - matchingRecords[matchingRecords.length - 1].timeCode < 5) {
@@ -105,7 +105,7 @@ class Main {
             case 13: // Enter
                 // Save timestamp
                 var timeStamp = this.videoPlayer.currentTime;
-                $('#rows > tr:eq(' + this.tableIndex + ') > td > input').val(timeStamp);
+                $('#rows > tr:eq(' + this.tableIndex + ') > td > input').val(timeStamp.toString());
                 this.karaoke[this.tableIndex].timeCode = timeStamp;
                 this.highlightRow(this.tableIndex + 1);
                 break;
@@ -147,19 +147,21 @@ class Main {
         this.highlightRow(0);
     }
 
-    getTimeCodes(): number[]{
-        return this.karaoke.map(function (val) { return val.timeCode.toFixed(1) /* divide by 1 to get numbers again */; })
+    getTimeCodes(): string[] {
+        return this.karaoke.map(function(val) {
+            return val.timeCode.toFixed(1) /* divide by 1 to get numbers again */;
+        });
     }
 
     addRowToTable(karaoke: Karaoke) {
         var timeCode = (karaoke.timeCode != undefined) ? karaoke.timeCode.toFixed(1) : "";
 
         $('#rows').append(
-                '<tr>' +
-                    '<td>' + karaoke.text + '</td>' +
-                    '<td><input type="number" step="0.1" value="' + timeCode + '"></td>' +
-                    '<td></td>' +
-                '</tr>');
+            '<tr>' +
+            '<td>' + karaoke.text + '</td>' +
+            '<td><input type="number" step="0.1" value="' + timeCode + '"></td>' +
+            '<td></td>' +
+            '</tr>');
 
         $('#rows tr').click((ev) => this.onRowClick(ev));
         $('#rows tr td input').on('change', (ev) => this.timeStampChange(ev))
@@ -196,14 +198,14 @@ window.onload = () => {
     var greeter = new Greeter(el);
     greeter.start();
 
-    var main;
+    var main: Main;
 
     var yt = new Shapes.YouTubePlayer('blah', () => {
         main.start();
     });
 
     var main = new Main(yt);
-    
+
     $('#btnConvert').click(() => main.loadTextToTable());
     document.onkeydown = (ev) => main.keyHandler(ev);
 };

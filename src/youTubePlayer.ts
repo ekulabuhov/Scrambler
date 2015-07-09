@@ -1,4 +1,4 @@
-/// <reference path="typings\youtube.d.ts" />
+/// <reference path="..\typings\youtube.d.ts" />
 
 // Module
 module Shapes {
