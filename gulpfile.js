@@ -6,10 +6,10 @@ var ecstatic = require('ecstatic');
 gulp.task('default', function(){
   http.createServer(
     ecstatic({ root: __dirname + '/dist' })
-  ).listen(8080);
+  ).listen(8081);
 
-  console.log('Listening on :8080');
-  gulp.watch('./src/*.ts', ['compile']);
+  console.log('Listening on :8081');
+  //gulp.watch('./src/*.ts', ['compile']);
 });
 
 gulp.task('compile', function(){

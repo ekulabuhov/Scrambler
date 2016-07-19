@@ -20,10 +20,20 @@ class WordScramble {
     selectedVocabulary: number[] = new Array<number>();
 
     constructor(public lyrics: Lyrics, public audio: Shapes.IMediaPlayer) {
-        while (this.selectedVocabulary.length < 10) {
-            var randomIndex = Math.floor((Math.random() * this.lyrics.vocabulary.length));
-            if (this.selectedVocabulary.indexOf(randomIndex) == -1)
-                this.selectedVocabulary.push(randomIndex);
+        var lineMap = {}
+        lyrics.vocabulary.forEach((voc, i) => { 
+            if (!lineMap[voc.line]) { 
+               lineMap[voc.line] = [];
+            }
+            lineMap[voc.line].push(i);
+        })
+        for (var currentLine = 0; currentLine < 10; currentLine++) {
+            if (lineMap[currentLine]) {
+                var randomIndex = lineMap[currentLine][Math.floor((Math.random() * lineMap[currentLine].length))];
+                //var randomIndex = Math.floor((Math.random() * this.lyrics.vocabulary.length));
+                if (this.selectedVocabulary.indexOf(randomIndex) == -1)
+                    this.selectedVocabulary.push(randomIndex);
+            }
         }
     }
 
@@ -133,7 +143,7 @@ class WordScramble {
 		
 		$('#myCarousel').one('slid', () => {
 			$('.item').not('.active').html("")
-			$('#playSampleBtn')[0].onclick = () => this.playSample(this.lyrics.timeCode[randomVoc.line], this.lyrics.timeCode[randomVoc.line + 1]);
+			$('#playSampleBtn')[0].onclick = () => this.playSample(this.lyrics.timeCode[randomVoc.line*2], this.lyrics.timeCode[randomVoc.line*2 + 1]);
 		
 			// External services
 			if (randomVoc.translatorWord != undefined)
@@ -215,7 +225,7 @@ window.onload = () => {
     var lesson = Logic.Db.getLesson(lessonId);
     var game: WordScramble;
 
-    var audio = <HTMLAudioElement>$('<audio src=resources/placebo-protege_moi.mp3 />').appendTo('body')[0];
+    var audio = <HTMLAudioElement>$('<audio src=resources/' + lesson.mediaUri + ' />').appendTo('body')[0];
     game = new WordScramble(lyrics, audio);
 	var scramble = game.scramble()
     console.log(scramble);
